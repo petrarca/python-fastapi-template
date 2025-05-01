@@ -62,8 +62,14 @@ tasks:
     cmds:
       - .venv/bin/python -m src.app.main {{.CLI_ARGS}}
       
+  test:
+    desc: Run tests with pytest
+    cmds:
+      - .venv/bin/pytest
+
   fct:
     desc: Format, check, test
     cmds:
       - task: format
       - task: check
+      - task: test

@@ -17,6 +17,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.0.272",
+    "pytest>=7.0.0",
+    "httpx>=0.24.0",  # Required for TestClient
 ]
 
 [tool.setuptools]
@@ -39,3 +41,7 @@ ignore = []
 
 [tool.ruff.lint.isort]
 known-first-party = ["src", "src.app"]
+
+[tool.pytest]
+pythonpath = "."
+testpaths = ["tests"]

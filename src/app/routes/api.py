@@ -1,7 +1,7 @@
 from typing import Dict
 
 from fastapi import APIRouter, status
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 # Create API router with tags for grouping in documentation
 api_router = APIRouter(prefix="/api", tags=["API"])
@@ -11,8 +11,7 @@ api_router = APIRouter(prefix="/api", tags=["API"])
 class HelloResponse(BaseModel):
     result: str
 
-    class Config:
-        json_schema_extra = {"example": {"result": "world"}}
+    model_config = ConfigDict(json_schema_extra={"example": {"result": "world"}})
 
 
 @api_router.get(

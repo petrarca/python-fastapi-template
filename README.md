@@ -1,13 +1,15 @@
-# FastAPI Application
+# FastAPI Application Template
 
-A minimal FastAPI application template.
+A minimal FastAPI application template with a modern project structure.
 
 ## Features
 
-- FastAPI for API development
-- pyproject.toml with setuptools as build system
-- Ruff for linting
-- UV for dependency management
+- **FastAPI** for modern API development
+- **Jinja2 Templates** for server-side rendering
+- **Modern Project Structure** with src layout
+- **Task-based Workflow** using Taskfile.yml
+- **Code Quality Tools**: Ruff for formatting and linting
+- **Dependency Management**: UV for fast package installation
 
 ## Setup
 
@@ -29,21 +31,23 @@ uv pip install -e ".[dev]"
 
 ## Running the application
 
+The project uses [Task](https://taskfile.dev/) for common operations:
+
 ```bash
-python run.py
+# Run with auto-reload for development
+task run:dev
+
+# Run without auto-reload for production
+task run
+
+# Run with custom options
+task run:custom -- --host 127.0.0.1 --port 5000 --no-reload
 ```
 
-With custom options:
+If you prefer to run directly with Python:
 
 ```bash
-# Change port
-python run.py --port 8080
-
-# Disable auto-reload
-python run.py --no-reload
-
-# Change host and port
-python run.py --host 127.0.0.1 --port 5000
+python -m src.app.main
 ```
 
 View all available options:

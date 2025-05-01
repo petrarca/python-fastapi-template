@@ -1,3 +1,9 @@
+"""Entry point for the FastAPI application.
+
+This module provides a command-line interface to run the FastAPI application
+with configurable options for host, port, and auto-reloading.
+"""
+
 import click
 import uvicorn
 

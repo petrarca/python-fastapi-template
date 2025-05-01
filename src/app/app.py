@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 from src.app.routes.api import api_router
 
@@ -13,15 +13,13 @@ from src.app.routes.api import api_router
 class WelcomeResponse(BaseModel):
     message: str
 
-    class Config:
-        json_schema_extra = {"example": {"message": "Welcome to FastAPI Application"}}
+    model_config = ConfigDict(json_schema_extra={"example": {"message": "Welcome to FastAPI Application"}})
 
 
 class HealthResponse(BaseModel):
     status: str
 
-    class Config:
-        json_schema_extra = {"example": {"status": "healthy"}}
+    model_config = ConfigDict(json_schema_extra={"example": {"status": "healthy"}})
 
 
 # Set up templates and static files
@@ -99,7 +97,7 @@ async def home(request: Request):
     Returns:
         HTMLResponse: The rendered HTML template
     """
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.get(
