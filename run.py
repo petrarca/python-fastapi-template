@@ -26,7 +26,7 @@ def run(host: str, port: int, reload: bool):
     """Run the FastAPI application with the specified options."""
     click.echo(f"Starting server at {host}:{port} (reload={'enabled' if reload else 'disabled'})")
     uvicorn.run(
-        "app.main:app",
+        "src.app.main:app",
         host=host,
         port=port,
         reload=reload,

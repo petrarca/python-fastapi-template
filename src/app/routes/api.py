@@ -10,13 +10,9 @@ api_router = APIRouter(prefix="/api", tags=["API"])
 # Response model for hello endpoint
 class HelloResponse(BaseModel):
     result: str
-    
+
     class Config:
-        schema_extra = {
-            "example": {
-                "result": "world"
-            }
-        }
+        json_schema_extra = {"example": {"result": "world"}}
 
 
 @api_router.get(
@@ -29,10 +25,10 @@ class HelloResponse(BaseModel):
 )
 async def hello() -> Dict[str, str]:
     """Hello endpoint that returns 'world'.
-    
+
     This is a simple endpoint that demonstrates the API functionality.
     It always returns the string 'world' as the result.
-    
+
     Returns:
         Dict[str, str]: A dictionary with a single key 'result' and value 'world'
     """

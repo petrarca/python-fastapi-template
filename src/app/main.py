@@ -6,34 +6,26 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
-from app.routes.api import api_router
+from src.app.routes.api import api_router
 
 
 # Define response models for better documentation
 class WelcomeResponse(BaseModel):
     message: str
-    
+
     class Config:
-        schema_extra = {
-            "example": {
-                "message": "Welcome to FastAPI Application"
-            }
-        }
+        json_schema_extra = {"example": {"message": "Welcome to FastAPI Application"}}
 
 
 class HealthResponse(BaseModel):
     status: str
-    
+
     class Config:
-        schema_extra = {
-            "example": {
-                "status": "healthy"
-            }
-        }
+        json_schema_extra = {"example": {"status": "healthy"}}
 
 
 # Set up templates and static files
-templates = Jinja2Templates(directory="app/templates")
+templates = Jinja2Templates(directory="src/app/templates")
 
 # Configure FastAPI application with detailed OpenAPI documentation
 app = FastAPI(
@@ -67,10 +59,21 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    swagger_ui_parameters={
+        "syntaxHighlight.theme": "obsidian",
+        "docExpansion": "list",
+        "deepLinking": True,
+        "defaultModelsExpandDepth": -1,
+        "displayRequestDuration": True,
+        "showExtensions": True,
+        "showCommonExtensions": True,
+        "tryItOutEnabled": True,
+        "persistAuthorization": True,
+    },
 )
 
 # Mount static files directory
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.mount("/static", StaticFiles(directory="src/app/static"), name="static")
 
 # Register the API router
 app.include_router(api_router)
@@ -86,20 +89,17 @@ app.include_router(api_router)
 )
 async def home(request: Request):
     """Home page endpoint rendering a template.
-    
+
     This endpoint serves as the entry point to the application and renders
     a beautiful home page with links to documentation and API endpoints.
-    
+
     Args:
         request: The incoming request object
-        
+
     Returns:
         HTMLResponse: The rendered HTML template
     """
-    return templates.TemplateResponse(
-        "home.html",
-        {"request": request}
-    )
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.get(
@@ -112,9 +112,9 @@ async def home(request: Request):
 )
 async def health() -> Dict[str, str]:
     """Health check endpoint.
-    
+
     This endpoint can be used for monitoring and health checks.
-    
+
     Returns:
         Dict[str, str]: A dictionary with the health status
     """

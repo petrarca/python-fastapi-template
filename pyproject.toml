@@ -20,10 +20,10 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["app"]
+packages = ["src", "src.app"]
 
 [tool.ruff]
-line-length = 88
+line-length = 150
 target-version = "py38"
 exclude = [
     ".git",
@@ -38,4 +38,4 @@ select = ["E", "F", "I"]
 ignore = []
 
 [tool.ruff.lint.isort]
-known-first-party = ["app"]
+known-first-party = ["src", "src.app"]
