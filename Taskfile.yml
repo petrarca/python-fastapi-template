@@ -50,17 +50,17 @@ tasks:
   run:
     desc: Run the application without auto-reload
     cmds:
-      - .venv/bin/python run.py --no-reload {{.CLI_ARGS}}
+      - .venv/bin/python -m src.app.main --no-reload {{.CLI_ARGS}}
 
   run:dev:
     desc: Run the application with auto-reload for development
     cmds:
-      - .venv/bin/python run.py --reload {{.CLI_ARGS}}
+      - .venv/bin/python -m src.app.main --reload {{.CLI_ARGS}}
 
   run:custom:
     desc: Run the application with custom options
     cmds:
-      - .venv/bin/python run.py {{.CLI_ARGS}}
+      - .venv/bin/python -m src.app.main {{.CLI_ARGS}}
       
   fct:
     desc: Format, check, test
