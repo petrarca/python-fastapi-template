@@ -1,14 +1,14 @@
 version: '3'
 
 tasks:
-  install:venv:
+  setup:
     desc: Create a Python virtual environment
     cmds:
       - uv venv
 
   install:
     desc: Install the package and development dependencies
-    deps: [install:venv]
+    deps: [setup]
     cmds:
       - uv pip install --python .venv/bin/python -e '.[dev]'
 
